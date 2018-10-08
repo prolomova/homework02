@@ -103,10 +103,23 @@ class ComplexNumberSpec extends FlatSpec with Matchers {
     math.abs(powerDif.image) should be <= eps
   }
 
-  "Equivalent complex numbers" should "have Equivalent real and imaginary parts" in {
+  "Complex number in negative power" should "be equal to (cos(phi)+i*sin(phi))^n=r^n(cos(n*phi)+i*sin(n*phi))" in {
+    val a = new ComplexNumber(1, 2)
+    val powerDif = a ~ -2 + new ComplexNumber(0.12, 0.16)
+    math.abs(powerDif.real) should be <= eps
+    math.abs(powerDif.image) should be <= eps
+  }
+
+  "Equivalent complex numbers" should "have equivalent real and imaginary parts" in {
     val a = new ComplexNumber(-1, 2.3)
     val b = new ComplexNumber(-1, 2.3)
     a == b should be (true)
+  }
+
+  "Equivalent complex numbers" should "have equivalent hash codes" in {
+    val a = new ComplexNumber(-1, 2.3)
+    val b = new ComplexNumber(-1, 2.3)
+    a.hashCode == b.hashCode should be (true)
   }
 
   "Nonequivalent complex numbers" should "have different real and imaginary parts" in {
